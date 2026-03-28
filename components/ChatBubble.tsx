@@ -42,13 +42,21 @@ export default function ChatBubble({ message, onExpire }: ChatBubbleProps) {
           {isUser && <p>{message.content}</p>}
 
           {!isUser && isAnswered && (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {message.content}
-            </motion.p>
+              {message.content.startsWith('data:image') ? (
+                <img
+                  src={message.content}
+                  alt="Lukisan AI"
+                  className="rounded-xl max-w-full border border-white/10"
+                />
+              ) : (
+                <p>{message.content}</p>
+              )}
+            </motion.div>
           )}
 
           {!isUser && isPending && (
