@@ -26,10 +26,10 @@ export async function submitQuestion(content: string, askerId?: string): Promise
 }
 
 // Atomic claim — returns true if successful
-export async function claimQuestion(questionId: string, responderId: string): Promise<boolean> {
+export async function claimQuestion(questionId: string, responderId?: string | null): Promise<boolean> {
   const { data, error } = await supabase.rpc('claim_question', {
     question_id: questionId,
-    responder: responderId,
+    responder: responderId ?? null,
   });
 
   if (error) {
