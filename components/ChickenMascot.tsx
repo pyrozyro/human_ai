@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type TargetAndTransition, type Transition } from 'framer-motion';
 
 type MascotMood = 'idle' | 'thinking' | 'happy' | 'shocked' | 'sleeping';
 
@@ -20,7 +20,7 @@ const moodExpressions: Record<MascotMood, { eyes: string; mouth: string; color: 
 export default function ChickenMascot({ mood = 'idle', size = 80 }: ChickenMascotProps) {
   const expr = moodExpressions[mood];
 
-  const animationMap: Record<MascotMood, object> = {
+  const animationMap: Record<MascotMood, TargetAndTransition> = {
     idle: { y: [0, -6, 0] },
     thinking: { rotate: [-5, 5, -5] },
     happy: { scale: [1, 1.15, 1], rotate: [-5, 5, -5, 5, 0] },
@@ -28,7 +28,7 @@ export default function ChickenMascot({ mood = 'idle', size = 80 }: ChickenMasco
     sleeping: { y: [0, 3, 0] },
   };
 
-  const transitionMap: Record<MascotMood, object> = {
+  const transitionMap: Record<MascotMood, Transition> = {
     idle: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
     thinking: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
     happy: { duration: 0.5, repeat: 2 },
